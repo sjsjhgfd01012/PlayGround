@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#070b13" />
+  <title>Helios Foundry — Dyson Sphere Program</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <a class="brand" href="#" aria-label="Helios Foundry home">
+        <span class="brand-mark"><i></i><i></i><i></i></span>
+        <span><b>HELIOS</b><small>FOUNDRY / 07</small></span>
+      </a>
+      <div class="save-state"><span class="live-dot"></span><span id="save-label">AUTOSAVE ON</span><span class="divider"></span><span class="cycle">CYCLE <b id="cycle">001</b></span></div>
+      <button class="icon-button" id="sound-toggle" aria-label="Toggle ambient animation" title="Toggle ambient animation">◉</button>
+    </header>
+
+    <section class="resource-strip" aria-label="Factory inventory">
+      <div class="resource-item"><span class="resource-glyph ore">▰</span><span><small>IRON ORE</small><b id="iron">64</b></span><em id="iron-rate">+0.0/s</em></div>
+      <div class="resource-item"><span class="resource-glyph silicon">◆</span><span><small>SILICON</small><b id="silicon">48</b></span><em id="silicon-rate">+0.0/s</em></div>
+      <div class="resource-item"><span class="resource-glyph alloy">⬡</span><span><small>STRUCTURAL ALLOY</small><b id="alloy">0</b></span><em id="alloy-rate">+0.0/s</em></div>
+      <div class="resource-item"><span class="resource-glyph cell">✦</span><span><small>SOLAR CELLS</small><b id="cells">0</b></span><em id="cells-rate">+0.0/s</em></div>
+      <div class="resource-item"><span class="resource-glyph chip">▦</span><span><small>PROCESSORS</small><b id="processors">0</b></span><em id="processors-rate">+0.0/s</em></div>
+      <div class="energy-readout"><span class="energy-icon">ϟ</span><span><small>GRID LOAD</small><b><span id="power">12</span><small> / 80 MW</small></b></span><div class="power-meter"><i id="power-fill"></i></div></div>
+    </section>
+
+    <main>
+      <div class="page-heading">
+        <div><div class="eyebrow"><span>DEEP SPACE INDUSTRIES</span><i></i><span>ORBITAL CONSTRUCTION</span></div><h1>Build a star's <span>future.</span></h1><p>Turn a quiet system into an engine of civilization.</p></div>
+        <div class="objective-card"><div class="objective-icon">◎</div><div><small>CURRENT DIRECTIVE</small><b id="directive">Seed the inner orbit</b><span id="directive-sub">Deploy the first 24 shell segments</span></div><span class="objective-arrow">↗</span></div>
+      </div>
+
+      <div class="dashboard">
+        <section class="panel system-panel">
+          <div class="panel-heading"><div><span class="section-index">01 / SYSTEM</span><h2>Helios system</h2></div><span class="status-pill"><i></i> STABLE</span></div>
+          <div class="system-visual" id="system-visual">
+            <canvas id="orbit-canvas" aria-label="Dyson sphere construction visualization"></canvas>
+            <div class="system-label label-star"><i></i> HELIOS <small>G2V · 1.02 M☉</small></div>
+            <div class="system-label label-orbit">SHELL ORBIT <small>0.42 AU</small></div>
+            <div class="visual-coordinates">RA 18h 36m <span>·</span> DEC +38° 47′</div>
+            <div class="visual-legend"><span><i class="legend-built"></i> ONLINE</span><span><i class="legend-ready"></i> READY</span><span><i class="legend-empty"></i> UNBUILT</span></div>
+            <div class="visual-scanline"></div>
+          </div>
+          <div class="sphere-progress">
+            <div class="progress-copy"><span><small>DYSON SHELL INTEGRITY</small><b id="progress-label">0 <em>/ 72 segments</em></b></span><span class="progress-percent" id="progress-percent">0%</span></div>
+            <div class="progress-track"><i id="progress-fill"></i></div>
+            <div class="ring-labels"><span class="ring-current" id="ring-one"><i></i>INNER RING <b id="ring-count-1">0/24</b></span><span id="ring-two"><i></i>MID RING <b id="ring-count-2">0/24</b></span><span id="ring-three"><i></i>OUTER RING <b id="ring-count-3">0/24</b></span></div>
+          </div>
+          <div class="deploy-row"><div><b id="deploy-title">Ready for deployment</b><small id="deploy-hint">Shell segments are assembled automatically in your factory.</small></div><button id="deploy-button" class="primary-button"><span>DEPLOY SEGMENT</span><b>↗</b></button></div>
+        </section>
+
+        <aside class="side-column">
+          <section class="panel intel-panel">
+            <div class="panel-heading"><div><span class="section-index">02 / TELEMETRY</span><h2>Mission status</h2></div><span class="mini-icon">⌁</span></div>
+            <div class="stat-line"><span>ENERGY OUTPUT</span><b><span id="energy-output">68</span> <small>MW</small></b></div>
+            <div class="stat-line"><span>FACTORY EFFICIENCY</span><b id="efficiency">100<small>%</small></b></div>
+            <div class="stat-line"><span>ACTIVE FACILITIES</span><b id="active-facilities">2<small> / 6</small></b></div>
+            <div class="intel-note"><span class="note-icon">✳</span><span><b>Stellar wind forecast</b><small>Clear skies · +18% solar output</small></span><span class="note-live">LIVE</span></div>
+          </section>
+          <section class="panel log-panel">
+            <div class="panel-heading"><div><span class="section-index">03 / FLIGHT LOG</span><h2>Recent activity</h2></div><span class="log-count" id="log-count">01</span></div>
+            <div class="activity-list" id="activity-list" aria-live="polite"></div>
+          </section>
+          <button class="reset-button" id="reset-button"><span>↻</span> RESET SIMULATION</button>
+        </aside>
+      </div>
+
+      <section class="factory-section">
+        <div class="factory-header"><div><span class="section-index">04 / PRODUCTION</span><h2>Orbital foundry <small>— manufacturing line</small></h2></div><span class="slots-available" id="slots-label">4 FREE SLOTS</span></div>
+        <div class="factory-layout">
+          <div class="facility-grid" id="facility-grid"></div>
+          <div class="build-menu"><div class="build-menu-title"><span>CONSTRUCTION</span><span class="blueprint-icon">⌘</span></div><div id="build-options"></div><div class="build-footnote"><span>ⓘ</span> Facilities run continuously while supplied.</div></div>
+        </div>
+      </section>
+      <footer><span>HELIOS FOUNDRY <i>·</i> AUTONOMOUS INDUSTRIAL NETWORK</span><span>BUILD SOMETHING THAT OUTLIVES YOU <b>✳</b></span></footer>
+    </main>
+    <div class="toast" id="toast" role="status"></div>
+  </div>
+  <script src="game.js"></script>
+</body>
+</html>
